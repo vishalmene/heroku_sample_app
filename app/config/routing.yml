@@ -1,3 +1,3 @@
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+upload:
+    resource: "@uploadBundle/Resources/config/routing.yml"
+    prefix:   /
