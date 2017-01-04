@@ -18,11 +18,11 @@
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
-	"ext-pdo": "*",
-        "ext-pdo_pgsql": "*
+	    "ext-pdo": "*",
+        "ext-pdo_pgsql": "*"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3",
+        "sensio/generator-bundle": "~3.0",
         "symfony/phpunit-bridge": "~2.7"
     },
     "scripts": {
@@ -34,12 +34,18 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
+        "pre-install-cmd": [
+            "HerokuDatabase::populateEnvironment"
+        ],
         "post-install-cmd": [
             "@symfony-scripts"
         ],
         "post-update-cmd": [
             "@symfony-scripts"
         ]
+    },
+    "config": {
+        "bin-dir": "bin"
     },
     "config": {
         "bin-dir": "bin",
@@ -52,7 +58,14 @@
         "symfony-web-dir": "web",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+            "env-map": {
+                "database_host": "DATABASE_HOST",
+                "database_port": "DATABASE_PORT",
+                "database_name": "DATABASE_NAME",
+                "database_user": "DATABASE_USER",
+                "database_password": "DATABASE_PASSWORD"
+            }
         }
     }
 }
