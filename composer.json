@@ -1,6 +1,6 @@
 {
-    "name": "root/heroku",
-    "license": "proprietary",
+    "name": "Heroku How To",
+    "license": "MIT",
     "type": "project",
     "autoload": {
         "psr-4": {
