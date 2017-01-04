@@ -5,7 +5,11 @@
     "autoload": {
         "psr-4": {
             "": "src/"
-        }
+        },
+        "classmap": [
+            "app/AppKernel.php",
+            "app/AppCache.php"
+        ]        
     },
     "require": {
         "php": ">=5.3.9",
@@ -42,10 +46,11 @@
         ],
         "post-update-cmd": [
             "@symfony-scripts"
-        ]
-    },
-    "config": {
-        "bin-dir": "bin"
+        ],
+        "compile": [
+          "rm web/app_dev.php",
+          "php app/console assetic:dump --no-debug"
+        ]        
     },
     "config": {
         "bin-dir": "bin",
