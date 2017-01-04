@@ -16,4 +16,10 @@ upload_delete:
 upload_viewuser:
     path:     /viewuser/{id}
     defaults: { _controller: uploadBundle:Default:viewuser }
+user_note:
+    path:     /note
+    defaults: { _controller: uploadBundle:Default:userNote }
+view_note:
+    path:     /viewnote/
+    defaults: { _controller: uploadBundle:Default:viewNote }
     

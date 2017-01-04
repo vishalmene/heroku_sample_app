@@ -27,6 +27,12 @@ uploadBundle\Entity\Uploadinfo:
             nullable: true
             length: 256
             fixed: false
+        addressTwo:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            column: address_two
         email:
             type: string
             nullable: true

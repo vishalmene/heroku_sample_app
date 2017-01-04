@@ -13,6 +13,8 @@
             var fName = $("#first_name").val();
             var lName = $("#last_name").val();
             var address = $("#address").val();
+            var addresstwo = $("#addresstwo").val();
+            
             var email = $("#email").val();
            // var filechk = document.getElementById("fileinfo").files.length;
 
@@ -28,6 +30,10 @@
                 return false;
             }
             if (address == "") {
+                alert("Please enter the address");
+                return false;
+            }
+             if (addresstwo == "") {
                 alert("Please enter the address");
                 return false;
             }
@@ -114,7 +120,8 @@
             <div class="inner-wrap">
                 <label>First Name <input value="{{data.firstName}}" type="text" class=""  id="first_name" name="first_name"></label>
                 <label>Last Name <input value="{{data.lastName}}" type="text" class=""  id="first_name" name="last_name"></label>
-                <label>Address  <input value="{{data.address}}" type="text" class=""  id="address" name="address"></label>
+                <label>Address  one<input value="{{data.address}}" type="text" class=""  id="address" name="address"></label>
+                <label>Address  two<input value="{{data.addresstwo}}" type="text" class=""  id="addresstwo" name="addresstwo"></label>
                 <label>Email <input value="{{data.email}}" type="text" class=""  id="email" name="email"></label>
                 <label>Upload File <input  value="{{data.file}}" type="file" class=""  id="fileinfo" name="file"  onchange="readURL(this); AlertFilesize(this.id, 100, 'KB');">  <img id="uploadedimage" style="width: 200px; height: 200px;float: right;" src="/uploads/{{data.file}}"></label>
                 

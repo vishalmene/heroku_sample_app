@@ -1,0 +1,23 @@
+uploadBundle\Entity\Notes:
+    type: entity
+    table: notes
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: true
+            length: 256
+            fixed: false
+        note:
+            type: text
+            nullable: true
+            length: 65535
+            fixed: false
+    lifecycleCallbacks: {  }

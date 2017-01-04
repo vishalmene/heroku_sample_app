@@ -1,8 +1,7 @@
 {% include 'uploadBundle:Default:header.html.twig' %}
 {% block body %}
-    <title> View user Page</title>
+      <title> View Note Page</title>
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
-    
     <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
     <div hight="20%"></div>
    <body> 
@@ -10,27 +9,17 @@
         <thead>
             <tr>
                 
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Address</th>
-                <th>Email</th>
-                <th>Photo</th>
-                <th>Phone</th>
+                <th>Unser Name</th>
+                <th>User Note</th>
                 
-                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
             {% for book_type in data %}
                 <tr>
-                    <td>{{book_type .firstName}}</td>
-                    <td>{{book_type .lastName}}</td>
-                    <td>{{book_type .address}} <br>{{book_type .addresstwo}}</td>
-                    <td>{{book_type .email}}</td>
-                    <td><img id="uploadedimage" style="width: 50px; height: 50px;" src="/uploads/{{book_type.file}}"></td>
-                    <td>{{book_type .phone}}</td>
-                    <td><a class="alink" title="Edit User" href="{{path('upload_edit', {'id': book_type .id})}}">Edit</a>  <a class="alink" title="View User" href="{{path('upload_viewuser', {'id': book_type .id})}}">View</a>  <a class="alink" style="padding: 0px;" title="Remove User" onclick="fnRemoveContent({{book_type .id}});" href="#">Delete</a></td>
-                
+                    <td style="padding: 5px 20%;">{{book_type .name}}</td>
+                    <td style="padding: 5px 20%;">{{book_type .note}}</td>
+                    
                 </tr>
             {% endfor %}
         </tbody>

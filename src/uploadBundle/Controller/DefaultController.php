@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use uploadBundle\Entity\Uploadinfo;
+use uploadBundle\Entity\Notes;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
@@ -42,6 +43,7 @@ class DefaultController extends Controller {
             $data->setFirstName($dataArr['first_name']);
             $data->setLastName($dataArr['last_name']);
             $data->setAddress($dataArr['address']);
+            $data->setAddressTwo($dataArr['addresstwo']);
             $data->setEmail($dataArr['email']);
             $data->setFile($filename);
             $data->setCreatedDate(new \DateTime("now"));
@@ -74,6 +76,7 @@ class DefaultController extends Controller {
         $data = $em_app->getRepository('uploadBundle:Uploadinfo')->findOneById($id);
        
         $dataArr = $request->request->all();
+        
         $files = $request->files->all();
         if ($request->getMethod() == 'POST' && !empty($dataArr)) {
            
@@ -91,6 +94,7 @@ class DefaultController extends Controller {
             $data->setFirstName($dataArr['first_name']);
             $data->setLastName($dataArr['last_name']);
             $data->setAddress($dataArr['address']);
+            $data->setAddressTwo($dataArr['addresstwo']);
             $data->setEmail($dataArr['email']);
             $data->setFile($filename);
             $data->setModifiedDate(new \DateTime("now"));
@@ -131,5 +135,30 @@ class DefaultController extends Controller {
         }
         return new Response(json_encode($flag), 200, array('Content-Type' => 'application/json'));
     }
-
+    
+    /**
+     *  Add user notes
+     * ****/
+    
+    public function userNoteAction(Request $request){
+        
+        $em_app = $this->getDoctrine()->getManager();
+        $dataArr = $request->request->all();
+        if ($request->getMethod() == 'POST' && (!empty($dataArr) )) {
+             $data = new Notes();
+             $data->setName($dataArr['name']);
+             $data->setNote($dataArr['note']);
+             $em_app->persist($data);
+            $em_app->flush();
+            $url = $this->generateUrl('view_note');
+            return $this->redirect($url);
+            
+        }
+         return $this->render('uploadBundle:Default:note.html.twig');
+    }
+    public function viewNoteAction(Request $request) {
+        $em_app = $this->getDoctrine()->getManager();
+        $resultObj = $em_app->getRepository('uploadBundle:Notes')->findBy(array(),array('id' => 'DESC'));
+        return $this->render('uploadBundle:Default:viewnote.html.twig', array('data' => $resultObj));
+    }
 }

@@ -259,4 +259,32 @@ class Uploadinfo
         return $this->modifiedDate;
     }
     
+    /**
+     * @var string
+     */
+    private $addressTwo;
+
+
+    /**
+     * Set addressTwo
+     *
+     * @param string $addressTwo
+     * @return Uploadinfo
+     */
+    public function setAddressTwo($addressTwo)
+    {
+        $this->addressTwo = $addressTwo;
+
+        return $this;
+    }
+
+    /**
+     * Get addressTwo
+     *
+     * @return string 
+     */
+    public function getAddressTwo()
+    {
+        return $this->addressTwo;
+    }
 }

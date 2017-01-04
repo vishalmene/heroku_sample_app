@@ -1,0 +1,39 @@
+{% include 'uploadBundle:Default:header.html.twig' %}
+{% block body %}
+      <title> Add Note Page</title>
+    <script type="text/javascript">
+        function validateForm() {
+
+            //alert($('input[type="file"]').val());
+            var name = $("#name").val();
+            var note = $("#note").val();
+            
+            if (name == "") {
+                alert("Please enter the User Name");
+                return false;
+            }
+            if (note == "") {
+                alert("Please enter the note");
+                return false;
+            }
+            
+
+        }
+
+    </script>
+    <div class="form-style-10">
+        <h1>Add Note !<span></span></h1>
+        <form id="addBook" method="post" class="form" name="add" role="form"  onsubmit="return validateForm()" >
+
+            <div class="inner-wrap">
+                <label>User Name <input type="text" class=""  id="name" name="name"></label>
+                <label>User Note <textarea type="text" class=""  id="note" name="note"></textarea></label>
+            </div>
+            <div class="button-section">
+               <a href="{{path('upload_view')}}">Go To View Page</a> <input type="submit" name="Sign Up" />
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+{% include 'uploadBundle:Default:footer.html.twig' %}
