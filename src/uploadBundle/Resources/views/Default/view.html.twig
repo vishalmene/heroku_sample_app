@@ -1,0 +1,166 @@
+{% include 'uploadBundle:Default:header.html.twig' %}
+{% block body %}
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
+    
+    <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+    
+    {#<link rel="stylesheet" href="{{ asset('/bundles/css/jquery.dataTables.css') }}" />
+        <script src="{{ asset('/bundles/js/jquery.dataTables.js') }}"></script> 
+         <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>#}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url(4.jpg);
+            background-size: cover;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: Tahoma, Arial, sans-serif;
+            color: orange;
+            margin: 100px 0;
+        }
+
+        .box {
+            width: 20%;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.2);
+            padding: 35px;
+            border: 2px solid #fff;
+            border-radius: 20px/50px;
+            background-clip: padding-box;
+            text-align: center;
+        }
+
+        .button {
+            font-size: 1em;
+            padding: 10px;
+            border: 2px solid orange;
+            border-radius: 20px/50px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease-out;
+        }
+        .button:hover {
+            background: orange;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            transition: opacity 500ms;
+            visibility: hidden;
+            opacity: 0;
+        }
+        .overlay:target {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .popup {
+            margin: 70px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            width: 30%;
+            position: relative;
+            transition: all 5s ease-in-out;
+        }
+
+        .popup h2 {
+            margin-top: 0;
+            color: #333;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+        .popup .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            transition: all 200ms;
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+        }
+        .popup .close:hover {
+            color: orange;
+        }
+        .popup .content {
+            max-height: 30%;
+            overflow: auto;
+        }
+        #users thead{
+           background: #2A88AD;
+        } 
+        #users_wrapper{
+            margin-top: 5%;
+        }
+        #users_length, #users_info{
+            margin-left: 7%;
+        }
+        #users_filter, #users_paginate{
+            margin-right: 8%;
+        }
+        .alink{
+            cursor: pointer;
+        }
+    </style>
+    <div hight="20%"></div>
+   <body> 
+    <table id="users" class="display" cellspacing="0" width="85%">
+        <thead>
+            <tr>
+                
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Photo</th>
+                <th>Phone</th>
+                
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book_type in data %}
+                <tr>
+                    <td>{{book_type .firstName}}</td>
+                    <td>{{book_type .lastName}}</td>
+                    <td>{{book_type .address}}</td>
+                    <td>{{book_type .email}}</td>
+                    <td>{{book_type .file}}</td>
+                    <td>{{book_type .phone}}</td>
+                    <td><a class="alink" title="Edit User" href="{{path('upload_edit', {'id': book_type .id})}}">Edit</a>  <a class="alink" title="View User" href="{{path('upload_viewuser', {'id': book_type .id})}}">View</a>  <a class="alink" style="padding: 0px;" title="Remove User" onclick="fnRemoveContent({{book_type .id}});">Delete</a></td>
+                
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#users').DataTable({
+                "ordering": false,
+                 //"order": [[ 0, "desc" ]]
+            });
+        });
+        
+        function fnRemoveContent(id){
+            if (confirm("Are you sure you want to delete?")) {
+                $.ajax({        
+                    url: '{{path('upload_delete')}}',
+                    type: 'post',             
+                    data: {'id' : id},
+                    success: function(response) {
+                        window.location.reload();
+                    }           
+                });
+            }
+        }
+    </script>
+    </body>
+{% endblock %}
+{% include 'uploadBundle:Default:footer.html.twig' %}

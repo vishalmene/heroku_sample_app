@@ -1,0 +1,53 @@
+uploadBundle\Entity\Uploadinfo:
+    type: entity
+    table: uploadinfo
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        firstName:
+            type: string
+            nullable: true
+            length: 256
+            fixed: false
+            column: first_name
+        lastName:
+            type: string
+            nullable: true
+            length: 256
+            fixed: false
+            column: last_name
+        address:
+            type: string
+            nullable: true
+            length: 256
+            fixed: false
+        email:
+            type: string
+            nullable: true
+            length: 256
+            fixed: false
+        file:
+            type: string
+            nullable: true
+            length: 100
+            fixed: false
+        phone:
+            type: string
+            nullable: true
+            length: 20
+            fixed: false
+        createdDate:
+            type: datetime
+            nullable: true
+            column: created_date
+        modifiedDate:
+            type: datetime
+            nullable: true
+            column: modified_date
+    lifecycleCallbacks: {  }

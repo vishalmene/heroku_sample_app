@@ -1,0 +1,46 @@
+{% include 'uploadBundle:Default:header.html.twig' %}
+
+{% block body %}
+    <style>
+        .form-style-10{
+                width: 600px !important;
+        }
+       .value {
+            width: 50%;
+            float: right;
+            color: black;
+            font-size: 18px;
+        }
+        .key{
+            width: 50%;
+            float: left;
+            color: black;
+            font-size: 18px;
+        }
+        .viewrow{
+                height: 15px;
+        }
+       .div-first {
+                height: 140px;
+        }
+    </style>    
+   
+    <div class="form-style-10">
+        <h1>View Details<span> </span></h1>
+            <div class ="div-first"><img id="uploadedimage" style="width: 150px; height: 150px;float: right;" src="/uploads/{{data.file}}"></div>
+            <div class="inner-wrap div-second">
+                <label class="viewrow"><span class="key">First Name     :</span><span class="value"> {{data.firstName}}</span></label>
+                <label class="viewrow"><span class="key">Last Name      :</span><span class="value">{{data.lastName}}</span></label>
+                <label class="viewrow"><span class="key">Address        :</span><span class="value">{{data.address}}</span></label>
+                <label class="viewrow"><span class="key">Email          :</span><span class="value"> {{data.email}}</span></label>
+                <label class="viewrow"><span class="key">Phone  :</span> <span class="value">{{data.phone}}</span></label>
+                <label class="viewrow"><span class="key">Created Date  :</span> <span class="value">{{data.createdDate.date |date("d-M-Y")}}</span></label>
+                <label class="viewrow"><span class="key">Updated Date  :</span> <span class="value">{{data.modifiedDate.date |date("d-M-Y")}}</span></label>
+                <input value="{{data.id}}" type="hidden" class=""  id="id" name="id">
+            </div>
+           <div class="button-section">
+                <a href="{{path('upload_view')}}">Go To View Page</a>
+            </div>
+    </div>
+{% endblock %}
+{% include 'uploadBundle:Default:footer.html.twig' %}
