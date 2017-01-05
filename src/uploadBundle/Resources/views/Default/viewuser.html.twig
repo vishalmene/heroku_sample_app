@@ -1,6 +1,7 @@
 {% include 'uploadBundle:Default:header.html.twig' %}
 
 {% block body %}
+    <title>{% block title %} Symfony Heroku Demo| View User!{% endblock %}</title>
     <style>
         .form-style-10{
                 width: 600px !important;
@@ -23,6 +24,21 @@
        .div-first {
                 height: 140px;
         }
+        .previous {
+     background: #2aad89;
+    padding: 8px 20px 8px 20px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+    font: normal 30px 'Bitter', serif;
+    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    border: 1px solid #257C9E;
+    font-size: 15px;
+        }
     </style>    
    
     <div class="form-style-10">
@@ -40,7 +56,7 @@
                 <input value="{{data.id}}" type="hidden" class=""  id="id" name="id">
             </div>
            <div class="button-section">
-                <a href="{{path('upload_view')}}">Go To View Page</a>
+               <a href="{{path('upload_view')}}" class="previous">Go To View Page</a></button> 
             </div>
     </div>
 {% endblock %}

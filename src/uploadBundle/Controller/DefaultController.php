@@ -113,7 +113,6 @@ class DefaultController extends Controller {
      * 
      * ***/
     public function viewuserAction(Request $request, $id) {
-        
         $em_app = $this->getDoctrine()->getManager();
         $data = $em_app->getRepository('uploadBundle:Uploadinfo')->findOneById($id);
         return $this->render('uploadBundle:Default:viewuser.html.twig', array('data' => $data)); 

@@ -5,7 +5,7 @@ upload_register:
     path:     /register/
     defaults: { _controller: uploadBundle:Default:register }
 upload_view:
-    path:     /view/
+    path:     /list/
     defaults: { _controller: uploadBundle:Default:view }
 upload_edit:
     path:     /edit/{id}
@@ -20,6 +20,6 @@ user_note:
     path:     /note
     defaults: { _controller: uploadBundle:Default:userNote }
 view_note:
-    path:     /viewnote/
+    path:     /listnote/
     defaults: { _controller: uploadBundle:Default:viewNote }
     

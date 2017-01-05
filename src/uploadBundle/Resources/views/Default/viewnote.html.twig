@@ -1,15 +1,22 @@
 {% include 'uploadBundle:Default:header.html.twig' %}
 {% block body %}
-      <title> View Note Page</title>
+    <style>
+        #users tr { text-align: left;}
+        #users_length,#users_info{ margin: 1% 18%;}
+        #users_filter{ margin: 1% 18%;}
+        #users_paginate{margin-right: 18%;}
+        </style>
+     
+          <title>{% block title %} Symfony Heroku Demo| List Note{% endblock %}</title>
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
     <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
     <div hight="20%"></div>
    <body> 
-    <table id="users" class="display" cellspacing="0" width="85%">
+    <table id="users" class="display" cellspacing="0" width="65%">
         <thead>
             <tr>
                 
-                <th>Unser Name</th>
+                <th>User Name</th>
                 <th>User Note</th>
                 
             </tr>
@@ -17,8 +24,8 @@
         <tbody>
             {% for book_type in data %}
                 <tr>
-                    <td style="padding: 5px 20%;">{{book_type .name}}</td>
-                    <td style="padding: 5px 20%;">{{book_type .note}}</td>
+                    <td>{{book_type .name}}</td>
+                    <td>{{book_type .note}}</td>
                     
                 </tr>
             {% endfor %}

@@ -1,12 +1,32 @@
 {% include 'uploadBundle:Default:header.html.twig' %}
 {% block body %}
-    <title> View user Page</title>
+    <style>
+          #users tr { text-align: left;}
+          #users_length{ margin: 1% 8%;}
+          #users_filter{ margin: 1% 8%;}
+          .previous {
+                background: #2aad89;
+               padding: 8px 20px 8px 20px;
+               border-radius: 5px;
+               -webkit-border-radius: 5px;
+               -moz-border-radius: 5px;
+               color: #fff;
+               text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+               font: normal 30px 'Bitter', serif;
+               -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+               -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+               box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+               border: 1px solid #257C9E;
+               font-size: 15px;
+        }
+    </style> 
+    <title> Symfony Heroku Demo| List User</title>
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
     
     <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
     <div hight="20%"></div>
    <body> 
-    <table id="users" class="display" cellspacing="0" width="85%">
+    <table id="users" class="display" cellspacing="0" width="75%">
         <thead>
             <tr>
                 
@@ -29,7 +49,7 @@
                     <td>{{book_type .email}}</td>
                     <td><img id="uploadedimage" style="width: 50px; height: 50px;" src="/uploads/{{book_type.file}}"></td>
                     <td>{{book_type .phone}}</td>
-                    <td><a class="alink" title="Edit User" href="{{path('upload_edit', {'id': book_type .id})}}">Edit</a>  <a class="alink" title="View User" href="{{path('upload_viewuser', {'id': book_type .id})}}">View</a>  <a class="alink" style="padding: 0px;" title="Remove User" onclick="fnRemoveContent({{book_type .id}});" href="#">Delete</a></td>
+                    <td><a class="alink previous" title="Edit User" href="{{path('upload_edit', {'id': book_type .id})}}" >Edit</a>  <a class="alink previous" title="View User" href="{{path('upload_viewuser', {'id': book_type .id})}}" >View</a>  <a class="alink previous"  title="Remove User" onclick="fnRemoveContent({{book_type .id}});" href="#">Delete</a></td>
                 
                 </tr>
             {% endfor %}
