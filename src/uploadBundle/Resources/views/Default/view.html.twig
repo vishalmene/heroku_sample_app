@@ -2,8 +2,8 @@
 {% block body %}
     <style>
           #users tr { text-align: left;}
-          #users_length{ margin: 1% 8%;}
-          #users_filter{ margin: 1% 8%;}
+          #users_length{ margin: 1% 13%;}
+          #users_filter{ margin: 1% 13%;}
           .previous {
                 background: #2aad89;
                 padding: 0px 8px 6px 8px;
@@ -19,14 +19,16 @@
                border: 1px solid #257C9E;
                font-size: 15px;
         }
+        #users_info { margin-left: 11%;}
+        #users_paginate { margin-right: 12%;}
     </style> 
-    <title> Symfony Heroku Demo| List User</title>
+    <title>Symfony Heroku Demo| List User</title>
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
     
     <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
     <div hight="20%"></div>
    <body> 
-    <table id="users" class="display" cellspacing="0" width="75%">
+    <table id="users" class="display" cellspacing="0" width="85%">
         <thead>
             <tr>
                 
@@ -36,7 +38,6 @@
                 <th>Email</th>
                 <th>Photo</th>
                 <th>Phone</th>
-                
                 <th>Edit</th>
             </tr>
         </thead>

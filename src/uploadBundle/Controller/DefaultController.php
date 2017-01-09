@@ -11,96 +11,64 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 class DefaultController extends Controller {
-    
+
     /**
      *  Default action 
-     * ***/
-    
-    public function indexAction(Request $request)
-    {
+     * ** */
+    public function indexAction(Request $request) {
         return $this->render('uploadBundle:Default:home.html.twig');
     }
-    
-    
+
     /**
      * 
      * Function to Register user 
      * 
-     * ***/
+     * ** */
     public function registerAction(Request $request) {
-        $filename = "";
-        $em_app = $this->getDoctrine()->getManager();
-        $dataArr = $request->request->all();
-        $files = $request->files->all();
-        if ($request->getMethod() == 'POST' && (!empty($dataArr) && isset($files["file"]))) {
-            $data = new Uploadinfo();
-            if (is_dir($data->getDocumentPdfAbsolutePath())) {
-                $book_cover_page = $files["file"];
-                $filename = $book_cover_page->getClientOriginalName();
-                $bookCoverFilePath = $data->getDocumentPdfAbsolutePath() . DIRECTORY_SEPARATOR;
-                $book_cover_page->move($bookCoverFilePath, $filename);
-            }
-            $data->setFirstName($dataArr['first_name']);
-            $data->setLastName($dataArr['last_name']);
-            $data->setAddress($dataArr['address']);
-            $data->setAddressTwo($dataArr['addresstwo']);
-            $data->setEmail($dataArr['email']);
-            $data->setFile($filename);
-            $data->setCreatedDate(new \DateTime("now"));
-            $data->setModifiedDate(new \DateTime("now"));
-            $data->setPhone($dataArr['phone']);
-            $em_app->persist($data);
-            $em_app->flush();
+
+//         $path  =  $this->container->get('kernel')->getRootdir().'/../web/uploads/testfile.txt';
+//       
+//        $handle = fopen($path, "a"); 
+//        fwrite($handle, "============Currently we are in registration page =======");
+//        
+//        fclose($handle);
+        $userManager = $this->get('user');
+        $userInfo['data'] = $request->request->all();
+        $userInfo['fileinfo'] = $request->files->all();
+        if ($request->getMethod() == 'POST' && (!empty($userInfo['data']) && isset($userInfo['fileinfo']["file"]))) {
+            $userManager->saveUserDetails($userInfo);
             $url = $this->generateUrl('upload_view');
             return $this->redirect($url);
         }
         return $this->render('uploadBundle:Default:index.html.twig');
     }
+
     /**
      * 
      *  Function to view All user details
      * 
-     * ***/
+     * ** */
     public function viewAction(Request $request) {
         $em_app = $this->getDoctrine()->getManager();
-        $resultObj = $em_app->getRepository('uploadBundle:Uploadinfo')->findBy(array(),array('id' => 'DESC'));
+        $resultObj = $em_app->getRepository('uploadBundle:Uploadinfo')->findBy(array(), array('id' => 'DESC'));
         return $this->render('uploadBundle:Default:view.html.twig', array('data' => $resultObj));
     }
+
     /**
      * 
      *  Function to edit user Details
      * 
-     * **/
-    public function editAction(Request $request, $id) {
+     * * */
+  public function editAction(Request $request, $id) {
+
         $em_app = $this->getDoctrine()->getManager();
+        $userManager = $this->get('user');
         $data = $em_app->getRepository('uploadBundle:Uploadinfo')->findOneById($id);
-       
-        $dataArr = $request->request->all();
+        $userInfo['data'] = $request->request->all();
+        $userInfo['fileinfo'] = $request->files->all();
         
-        $files = $request->files->all();
-        if ($request->getMethod() == 'POST' && !empty($dataArr)) {
-           
-            if(isset($files["file"])){
-                 $dataFile = new Uploadinfo();
-            if (is_dir($dataFile->getDocumentPdfAbsolutePath())) {
-                $book_cover_page = $files["file"];
-                $filename = $book_cover_page->getClientOriginalName();
-                $bookCoverFilePath = $dataFile->getDocumentPdfAbsolutePath() . DIRECTORY_SEPARATOR;
-                $book_cover_page->move($bookCoverFilePath, $filename);
-            }
-            }else{
-               $filename = $data->getFile();
-            }
-            $data->setFirstName($dataArr['first_name']);
-            $data->setLastName($dataArr['last_name']);
-            $data->setAddress($dataArr['address']);
-            $data->setAddressTwo($dataArr['addresstwo']);
-            $data->setEmail($dataArr['email']);
-            $data->setFile($filename);
-            $data->setModifiedDate(new \DateTime("now"));
-            $data->setPhone($dataArr['phone']);
-            $em_app->persist($data);
-            $em_app->flush();
+        if ($request->getMethod() == 'POST' && !empty($userInfo['data'])) {
+            $userManager->updateUserDetails($userInfo,$id);
             $url = $this->generateUrl('upload_view');
             return $this->redirect($url);
         }
@@ -111,17 +79,18 @@ class DefaultController extends Controller {
      * 
      *  Function to view userdetails.
      * 
-     * ***/
+     * ** */
     public function viewuserAction(Request $request, $id) {
         $em_app = $this->getDoctrine()->getManager();
         $data = $em_app->getRepository('uploadBundle:Uploadinfo')->findOneById($id);
-        return $this->render('uploadBundle:Default:viewuser.html.twig', array('data' => $data)); 
+        return $this->render('uploadBundle:Default:viewuser.html.twig', array('data' => $data));
     }
+
     /**
      * 
      *  Function to delete user details
      * 
-     * ****/
+     * *** */
     public function deleteAction(Request $request) {
         $flag = false;
         $em_app = $this->getDoctrine()->getManager();
@@ -134,30 +103,26 @@ class DefaultController extends Controller {
         }
         return new Response(json_encode($flag), 200, array('Content-Type' => 'application/json'));
     }
-    
+
     /**
      *  Add user notes
-     * ****/
-    
-    public function userNoteAction(Request $request){
-        
+     * *** */
+    public function userNoteAction(Request $request) {
         $em_app = $this->getDoctrine()->getManager();
+        $userManager = $this->get('user');
         $dataArr = $request->request->all();
         if ($request->getMethod() == 'POST' && (!empty($dataArr) )) {
-             $data = new Notes();
-             $data->setName($dataArr['name']);
-             $data->setNote($dataArr['note']);
-             $em_app->persist($data);
-            $em_app->flush();
+            $userManager->saveNote($dataArr);
             $url = $this->generateUrl('view_note');
             return $this->redirect($url);
-            
         }
-         return $this->render('uploadBundle:Default:note.html.twig');
+        return $this->render('uploadBundle:Default:note.html.twig');
     }
+
     public function viewNoteAction(Request $request) {
         $em_app = $this->getDoctrine()->getManager();
-        $resultObj = $em_app->getRepository('uploadBundle:Notes')->findBy(array(),array('id' => 'DESC'));
+        $resultObj = $em_app->getRepository('uploadBundle:Notes')->findBy(array(), array('id' => 'DESC'));
         return $this->render('uploadBundle:Default:viewnote.html.twig', array('data' => $resultObj));
     }
+
 }
