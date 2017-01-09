@@ -22,8 +22,10 @@
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
-	    "ext-pdo": "*",
-        "ext-pdo_pgsql": "*"
+	"ext-pdo": "*",
+        "ext-pdo_pgsql": "*",
+        "sensio/generator-bundle": "~3.0",
+        "symfony/phpunit-bridge": "~2.7"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",
