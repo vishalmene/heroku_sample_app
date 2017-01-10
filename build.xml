@@ -8,8 +8,8 @@
   <property name="builddir" value="${workspace}/app/build" />
   <property environment="env"/>
   <target name="build"
-  depends="prepare,vendors,lint,phpcs-ci,phpcb,deploy,phpunit,destroy"/>
-  <target name="build-parallel" depends="prepare,lint,tools-parallel,phpcb,deploy,phpunit,destroy"/>
+  depends="prepare,vendors,lint,phpcs-ci,phpcb,login,deploy,phpunit,destroy"/>
+  <target name="build-parallel" depends="prepare,lint,tools-parallel,phpcb,login,deploy,phpunit,destroy"/>
 
   <target name="tools-parallel" description="Run tools in parallel">
     <parallel threadCount="2">
@@ -85,11 +85,16 @@
     <chmod file="${composer.path}" perm="775" />
   </target>
 
-  <target name="deploy">
-    <echo message="Deploying code on Heroku" />
+  <target name="login">
+    <echo message="Login to Heroku" />
     <exec dir="${basedir}" executable="/usr/bin/expect" failonerror="true">
       <arg value="/var/lib/jenkins/Heroku/heroku_login.exp"/>
     </exec>  
+    <exec dir="${basedir}" executable="/var/lib/jenkins/Heroku/heroku_create_app" failonerror="true">
+    </exec>
+  </target>
+    <target name="deploy"  depends="login">
+    <echo message="Deploying code on Heroku" /> 
     <exec dir="${basedir}" executable="/var/lib/jenkins/Heroku/heroku_create_app" failonerror="true">
     </exec>
   </target>
