@@ -4,8 +4,11 @@ namespace uploadBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use PHPUnit\Framework\TestCase;
+use uploadBundle\Tests\DataFixtures\LoadMyUsersForUploadusertest;
+use Doctrine\Common\Persistence\ObjectManager;
 
-
+use uploadBundle\Entity\Uploadinfo;
+use uploadBundle\Entity\Notes;
 
 class DefaultControllerTest extends WebTestCase
 {
@@ -14,9 +17,26 @@ class DefaultControllerTest extends WebTestCase
         $this->container    = static::$kernel->getContainer();
         $this->em           = static::$kernel->getContainer()->get('doctrine')->getManager();
         
+        $data = new Uploadinfo();
+        $data->setFirstName("Test First Name");
+        $data->setLastName("Test last Name");
+        $data->setAddress("Test Address");
+        $data->setAddressTwo("Address Two");
+        $data->setEmail("test@gmail.com");
+        $data->setCreatedDate(new \DateTime("now"));
+        $data->setModifiedDate(new \DateTime("now"));
+        $data->setPhone("98899898989");
+        $this->em ->persist($data);
+        $this->em ->flush();
+
     }
     
     public function tearDown() {
+        
+       $data =   $this->em->createQuery("SELECT a.id FROM uploadBundle:Uploadinfo a order by a.id desc")->getScalarResult(); 
+       $id = isset($data[0])?$data[0]['id']:"";
+        
+       $this->em->createQuery("DELETE FROM uploadBundle:Uploadinfo a WHERE a.id = $id")->getScalarResult(); 
        $this->container->get('doctrine')->getConnection()->close();
        parent::tearDown();    
     }
@@ -72,6 +92,19 @@ class DefaultControllerTest extends WebTestCase
      * @group functional
      **/
     public function  testDelete(){
+        
+        $data = new Uploadinfo();
+        $data->setFirstName("Test First Name");
+        $data->setLastName("Test last Name");
+        $data->setAddress("Test Address");
+        $data->setAddressTwo("Address Two");
+        $data->setEmail("test@gmail.com");
+        $data->setCreatedDate(new \DateTime("now"));
+        $data->setModifiedDate(new \DateTime("now"));
+        $data->setPhone("98899898989");
+        $this->em ->persist($data);
+        $this->em ->flush();
+        
         $row = $this->em->createQuery("SELECT a.id FROM uploadBundle:Uploadinfo a  order by a.id desc")->getScalarResult(); 
         $id = $row[0]['id'];
         $crawler = $this->client->request('POST', '/delete',array('id'=>$id));
