@@ -6,4 +6,5 @@ git add .
 git commit -m "Adding code for Testing"
 git push heroku master
 #heroku apps:destroy --confirm ib-heroku
-https://ib-heroku.herokuapp.com/uploads/junit.xml
+heroku run bin/phpunit -c app
+wget https://ib-heroku.herokuapp.com/uploads/junit.xml
