@@ -64,7 +64,7 @@
 
 
   <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">
-    <exec executable="/usr/local/bin/phpcb">
+    <exec executable="/usr/bin/phpcb">
       <arg value="--log" />
       <arg path="${builddir}/logs" />
       <arg value="--source" />
