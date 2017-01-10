@@ -87,13 +87,13 @@
 
   <target name="login">
     <echo message="Login to Heroku" />
-    <exec dir="${basedir}" executable="/usr/bin/expect" failonerror="true">
+    <exec dir="${workspace}" executable="/usr/bin/expect" failonerror="true">
       <arg value="/var/lib/jenkins/Heroku/heroku_login.exp"/>
     </exec> 
   </target>
     <target name="deploy"  depends="login">
     <echo message="Deploying code on Heroku" /> 
-    <exec dir="${basedir}" executable="/var/lib/jenkins/Heroku/heroku_create_app" failonerror="true">
+    <exec dir="${workspace}" executable="/var/lib/jenkins/Heroku/heroku_create_app" failonerror="true">
     </exec>
   </target>
 
