@@ -53,7 +53,8 @@
           "rm web/app_dev.php",
           "php app/console assetic:dump --no-debug",
           "php app/console doctrine:schema:update --force",
-          "bin/phpunit -c app"
+          "bin/phpunit -c app",
+          "cd web/uploads && tar czf coverage.tar.gz coverage"
         ]        
     },
     "config": {
