@@ -45,10 +45,10 @@
        </testsuite>
    </testsuites> 
     
-    <php>
+<!--     <php>
         <server name="KERNEL_DIR" value="../app/" />
     </php>
-    
+     -->
     <logging>
         <log type="junit" target="../web/uploads/junit.xml" logIncompleteSkipped="false"/>
     </logging>

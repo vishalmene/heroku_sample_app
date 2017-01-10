@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Project Test Suite" tests="8" assertions="10" failures="0" errors="0" time="1.305567">
+    <testsuite name="uploadBundle\Tests\Controller\DefaultControllerTest" file="/var/www/html/heroku/src/uploadBundle/Tests/Controller/DefaultControllerTest.php" tests="5" assertions="7" failures="0" errors="0" time="0.822594">
+      <testcase name="testIndex" class="uploadBundle\Tests\Controller\DefaultControllerTest" file="/var/www/html/heroku/src/uploadBundle/Tests/Controller/DefaultControllerTest.php" line="27" assertions="2" time="0.264305"/>
+      <testcase name="testRegister" class="uploadBundle\Tests\Controller\DefaultControllerTest" file="/var/www/html/heroku/src/uploadBundle/Tests/Controller/DefaultControllerTest.php" line="39" assertions="1" time="0.067081"/>
+      <testcase name="testView" class="uploadBundle\Tests\Controller\DefaultControllerTest" file="/var/www/html/heroku/src/uploadBundle/Tests/Controller/DefaultControllerTest.php" line="52" assertions="1" time="0.102514"/>
+      <testcase name="testEdit" class="uploadBundle\Tests\Controller\DefaultControllerTest" file="/var/www/html/heroku/src/uploadBundle/Tests/Controller/DefaultControllerTest.php" line="62" assertions="2" time="0.118045"/>
+      <testcase name="testDelete" class="uploadBundle\Tests\Controller\DefaultControllerTest" file="/var/www/html/heroku/src/uploadBundle/Tests/Controller/DefaultControllerTest.php" line="74" assertions="1" time="0.270649"/>
+    </testsuite>
+    <testsuite name="uploadBundle\Tests\Services\UserManagerTest" file="/var/www/html/heroku/src/uploadBundle/Tests/Services/UserManagerTest.php" tests="3" assertions="3" failures="0" errors="0" time="0.482973">
+      <testcase name="testSaveUserDetails" class="uploadBundle\Tests\Services\UserManagerTest" file="/var/www/html/heroku/src/uploadBundle/Tests/Services/UserManagerTest.php" line="33" assertions="1" time="0.122109"/>
+      <testcase name="testupdateUserDetails" class="uploadBundle\Tests\Services\UserManagerTest" file="/var/www/html/heroku/src/uploadBundle/Tests/Services/UserManagerTest.php" line="48" assertions="1" time="0.207120"/>
+      <testcase name="testSaveNote" class="uploadBundle\Tests\Services\UserManagerTest" file="/var/www/html/heroku/src/uploadBundle/Tests/Services/UserManagerTest.php" line="67" assertions="1" time="0.153744"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
