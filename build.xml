@@ -8,8 +8,8 @@
   <property name="builddir" value="${workspace}/app/build" />
   <property environment="env"/>
   <target name="build"
-  depends="prepare,vendors,lint,phpcs-ci,phpcb,login,deploy,phpunit,destroy"/>
-  <target name="build-parallel" depends="prepare,lint,tools-parallel,phpcb,login,deploy,phpunit,destroy"/>
+  depends="prepare,vendors,login,deploy,phpunit,destroy"/>
+  <target name="build-parallel" depends="prepare,login,deploy,phpunit,destroy"/>
 
   <target name="tools-parallel" description="Run tools in parallel">
     <parallel threadCount="2">
@@ -105,7 +105,7 @@
 
   <target name="destroy" depends="deploy">
     <echo message="Destroying heroku app" />
-    <exec dir="${basedir}" executable="/usr/local/bin/heroku" failonerror="true">
+    <exec dir="${basedir}" executable="/usr/bin/heroku" failonerror="true">
             <arg value="apps:destroy"/>
             <arg value="--confirm"/>
             <arg value="ib-heroku"/>
