@@ -88,6 +88,7 @@
   <target name="deploy">
     <echo message="Deploying code on Heroku" />
     <exec dir="${basedir}" executable="/var/lib/jenkins/Heroku/heroku_login.exp" failonerror="true">
+    </exec>  
     <exec dir="${basedir}" executable="/var/lib/jenkins/Heroku/heroku_create_app" failonerror="true">
     </exec>
   </target>
