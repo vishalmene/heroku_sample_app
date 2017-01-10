@@ -89,9 +89,7 @@
     <echo message="Login to Heroku" />
     <exec dir="${basedir}" executable="/usr/bin/expect" failonerror="true">
       <arg value="/var/lib/jenkins/Heroku/heroku_login.exp"/>
-    </exec>  
-    <exec dir="${basedir}" executable="/var/lib/jenkins/Heroku/heroku_create_app" failonerror="true">
-    </exec>
+    </exec> 
   </target>
     <target name="deploy"  depends="login">
     <echo message="Deploying code on Heroku" /> 
