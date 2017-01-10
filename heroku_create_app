@@ -1,0 +1,9 @@
+#!/bin/sh
+heroku apps:create ib-heroku
+heroku addons:add heroku-postgresql:hobby-dev
+heroku config:set SYMFONY_ENV=prod
+git add .
+git commit -m "Adding code for Testing"
+git push heroku master
+#heroku apps:destroy --confirm ib-heroku
+
