@@ -52,7 +52,8 @@
         "compile": [
           "rm web/app_dev.php",
           "php app/console assetic:dump --no-debug",
-          "php app/console doctrine:schema:update --force"          
+          "php app/console doctrine:schema:update --force",
+          "bin/phpunit -c app"
         ]        
     },
     "config": {
