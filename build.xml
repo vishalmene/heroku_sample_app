@@ -100,15 +100,5 @@
   <target name="phpunit" depends="deploy">
     <echo message="Pulling logs for phpunit" />
     <get src="https://ib-heroku.herokuapp.com/uploads/junit.xml" dest="${builddir}/logs/junit.xml"/>
-    <untar src="https://ib-heroku.herokuapp.com/uploads/coverage.tar.gz" dest="${builddir}/"/>
   </target>
-
-  <target name="destroy" depends="deploy">
-    <echo message="Destroying heroku app" />
-    <exec dir="${basedir}" executable="/usr/bin/heroku" failonerror="true">
-            <arg value="apps:destroy"/>
-            <arg value="--confirm"/>
-            <arg value="ib-heroku"/>
-    </exec>
-  </target>  
 </project>
