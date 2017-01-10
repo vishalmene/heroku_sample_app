@@ -50,9 +50,6 @@
     </php>
      -->
     <logging>
-        <log type="coverage-html" target="../web/uploads/coverage" title="heroku" charset="UTF-8" yui="true" highlight="true"
-       lowUpperBound="35" highLowerBound="70"/>
-        <log type="coverage-clover" target="../web/uploads/clover.xml"/>
         <log type="junit" target="../web/uploads/junit.xml" logIncompleteSkipped="false"/>
     </logging>    
    
