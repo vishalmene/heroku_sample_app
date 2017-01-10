@@ -8,12 +8,11 @@
   <property name="builddir" value="${workspace}/app/build" />
   <property environment="env"/>
   <target name="build"
-  depends="prepare,vendors,parameters,lint,phpcpd,phpcs-ci,phpcb,deploy,phpunit"/>
+  depends="prepare,vendors,parameters,lint,phpcs-ci,phpcb,deploy,phpunit"/>
   <target name="build-parallel" depends="prepare,lint,tools-parallel,phpcb,deploy,phpunit"/>
 
   <target name="tools-parallel" description="Run tools in parallel">
     <parallel threadCount="2">
-      <antcall target="phpcpd"/>
       <antcall target="phpcs-ci"/>
     </parallel>
   </target>
@@ -63,13 +62,6 @@
     </exec>
   </target>
 
-  <target name="phpcpd" description="Find duplicate code using PHPCPD">
-    <exec executable="/usr/local/bin/phpcpd">
-      <arg value="--log-pmd" />
-      <arg value="${builddir}/logs/pmd-cpd.xml" />
-      <arg path="${sourcedir}" />
-    </exec>
-  </target>
 
   <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">
     <exec executable="/usr/local/bin/phpcb">
