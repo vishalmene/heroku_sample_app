@@ -8,7 +8,7 @@
   <property name="builddir" value="${workspace}/app/build" />
   <property environment="env"/>
   <target name="build"
-  depends="prepare,vendors,parameters,lint,phpcs-ci,phpcb,deploy,phpunit,destroy"/>
+  depends="prepare,vendors,lint,phpcs-ci,phpcb,deploy,phpunit,destroy"/>
   <target name="build-parallel" depends="prepare,lint,tools-parallel,phpcb,deploy,phpunit,destroy"/>
 
   <target name="tools-parallel" description="Run tools in parallel">
