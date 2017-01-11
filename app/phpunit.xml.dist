@@ -49,10 +49,14 @@
         <server name="KERNEL_DIR" value="../app/" />
     </php>
      -->
-    <logging>
-        <log type="junit" target="../web/uploads/junit.xml" logIncompleteSkipped="false"/>
-    </logging>    
-   
+  
+   <logging>
+       <log type="coverage-html" target="build/coverage" title="premiumACCESS" charset="UTF-8" yui="true" highlight="true"
+      lowUpperBound="35" highLowerBound="70"/>
+       <log type="coverage-clover" target="build/logs/clover.xml"/>
+       <log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false"/>
+   </logging>
+ 
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="false">
             <directory>../src</directory>
