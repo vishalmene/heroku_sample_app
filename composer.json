@@ -55,7 +55,8 @@
           "php app/console doctrine:schema:update --force",
           "cp  app/xdebug.so  ~/.heroku/php/lib/php/extensions/no-debug-non-zts-20131226",
           "cp 150-ext-xdebug.ini ~/.heroku/php/etc/php/conf.d",
-          "bin/phpunit -c app"
+          "bin/phpunit -c app",
+          "cd web/uploads && tar czf coverage.tar.gz coverage"
         ]        
     },
     "config": {

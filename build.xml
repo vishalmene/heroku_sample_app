@@ -100,5 +100,9 @@
   <target name="phpunit" depends="deploy">
     <echo message="Pulling logs for phpunit" />
     <get src="https://ib-heroku.herokuapp.com/uploads/junit.xml" dest="${builddir}/logs/junit.xml"/>
+    <get src="https://ib-heroku.herokuapp.com/uploads/clover.xml" dest="${builddir}/logs/clover.xml"/>
+    <get src="https://ib-heroku.herokuapp.com/uploads/coverage.tar.gz" dest="${builddir}/coverage.tar.gz"/>
+    <gunzip src="${builddir}/coverage.tar.gz"/>
+    <untar src="${builddir}/coverage.tar" dest="${builddir}"/>
   </target>
 </project>
