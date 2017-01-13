@@ -8,17 +8,17 @@
   <property name="builddir" value="${workspace}/app/build" />
   <property environment="env"/>
   <target name="build"
-  depends="prepare,vendors,login,deploy,phpunit"/>
-  <target name="build-parallel" depends="prepare,login,deploy,phpunit"/>
+  depends="prepare,vendors,lint,phpcpd,phpcs-ci,phpcb,login,deploy,phpunit,destroy"/>
+  <target name="build-parallel" depends="prepare,lint,tools-parallel,phpcb,login,deploy,phpunit,destroy"/>
 
   <target name="tools-parallel" description="Run tools in parallel">
     <parallel threadCount="2">
+      <antcall target="phpcpd"/>
       <antcall target="phpcs-ci"/>
     </parallel>
   </target>
 
   <target name="clean" description="Cleanup build artifacts">
-    <delete dir="${builddir}/api"/>
     <delete dir="${builddir}/api"/>
     <delete dir="${builddir}/code-browser"/>
     <delete dir="${builddir}/coverage"/>
@@ -73,6 +73,14 @@
       <arg path="${builddir}/code-browser" />
     </exec>
   </target>
+
+  <target name="phpcpd" description="Find duplicate code using PHPCPD">
+    <exec executable="/usr/local/bin/phpcpd">
+      <arg value="--log-pmd" />
+      <arg value="${builddir}/logs/pmd-cpd.xml" />
+      <arg path="${sourcedir}" />
+    </exec>
+  </target>  
   
   <target name="vendors" depends="composer">
     <exec executable="${basedir}/composer.phar" failonerror="true">
@@ -91,7 +99,7 @@
       <arg value="/var/lib/jenkins/Heroku/heroku_login.exp"/>
     </exec> 
   </target>
-    <target name="deploy"  depends="login">
+  <target name="deploy"  depends="login">
     <echo message="Deploying code on Heroku" /> 
     <exec dir="${workspace}" executable="/var/lib/jenkins/Heroku/heroku_create_app" failonerror="true">
     </exec>
@@ -105,4 +113,9 @@
     <gunzip src="${builddir}/coverage.tar.gz"/>
     <untar src="${builddir}/coverage.tar" dest="${builddir}"/>
   </target>
+  <target name="destroy"  depends="login">
+    <echo message="Destroying Heroku App" /> 
+    <exec dir="${workspace}" executable="/var/lib/jenkins/Heroku/heroku_destroy_app" failonerror="true">
+    </exec>
+  </target>  
 </project>
